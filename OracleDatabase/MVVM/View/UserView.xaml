@@ -1,0 +1,1460 @@
+﻿<UserControl x:Class="ModernStyledApplication.MVVM.View.UserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="850"
+             Background="#1E1E1E">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="Fields"
+              Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+
+            <Image x:Name="AddUserIcon"
+                   Source="C:\Users\AL AMEER\source\repos\New folder\OracleDatabase\OracleDatabase\Images\add_user.png"
+                   Grid.Row="0"
+                   MaxWidth="400"
+                   MaxHeight="400" />
+            
+            <Border x:Name="UsernameBox"
+                    Margin="15,15,15,15"
+                    Grid.Row="1">
+                <Grid>
+
+                    <TextBox FocusVisualStyle="{StaticResource FocusVisualStyle}"
+                             KeyDown="UsernameTextBox_KeyDown"
+                             Width="240"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Center"
+                             Height="42"
+                             Padding="5,0,0,0"
+                             BorderThickness="0"
+                             VerticalContentAlignment="Center"
+                             Background="#252525"
+                             BorderBrush="Black"
+                             Foreground="White"
+                             FontFamily="Agency FB"
+                             FontSize="18"
+                             x:Name="UsernameTextBox" />
+
+                    <TextBlock x:Name="UsernameTextBlock"
+                               IsHitTestVisible="False"
+                               Text="Username"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Foreground="DarkGray"
+                               Width="228"
+                               FontSize="18"
+                               Margin="0,9,0,0"
+                               FontFamily="Agency FB">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=UsernameTextBox}"
+                                                 Value="">
+                                        <Setter Property="Visibility"
+                                                Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </Border>
+            
+            <Border x:Name="PasswordBox"
+                    Grid.Row="2"
+                    Margin="0,15,0,15">
+                <Grid>
+
+                    <TextBox FocusVisualStyle="{StaticResource FocusVisualStyle}"
+                             KeyDown="PasswordTextBox_KeyDown"
+                             Width="240"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             x:Name="PasswordTextBox"
+                             Height="42"
+                             Padding="5,0,0,0"
+                             BorderThickness="0"
+                             VerticalContentAlignment="Center"
+                             Background="#252525"
+                             BorderBrush="Black"
+                             Foreground="White"
+                             FontFamily="Agency FB"
+                             FontSize="18" />
+
+                    <TextBlock x:Name="PasswordTextBlock"
+                               IsHitTestVisible="False"
+                               Text="Password"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Foreground="DarkGray"
+                               Width="228"
+                               FontSize="18"
+                               Margin="0,9,0,0"
+                               FontFamily="Agency FB">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=PasswordTextBox}"
+                                                 Value="">
+                                        <Setter Property="Visibility"
+                                                Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
+                </Grid>
+            </Border>
+            
+            <Border x:Name="TableBox"
+                    Grid.Row="3"
+                    Margin="0,15,0,15">
+                <Grid>
+
+                    <TextBox FocusVisualStyle="{StaticResource FocusVisualStyle}"
+                             KeyDown="TableTextBox_KeyDown"
+                             Width="240"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             x:Name="TableTextBox"
+                             Height="42"
+                             Padding="5,0,0,0"
+                             BorderThickness="0"
+                             VerticalContentAlignment="Center"
+                             Background="#252525"
+                             BorderBrush="Black"
+                             Foreground="White"
+                             FontFamily="Agency FB"
+                             FontSize="18" />
+
+                    <TextBlock x:Name="TableTextBlock"
+                               IsHitTestVisible="False"
+                               Text="Applicable Tables"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Foreground="DarkGray"
+                               Width="228"
+                               ToolTip="Comma seperated table names that the priviliges apply on"
+                               FontSize="18"
+                               Margin="0,9,0,0"
+                               FontFamily="Agency FB">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=TableTextBox}"
+                                                 Value="">
+                                        <Setter Property="Visibility"
+                                                Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
+                </Grid>
+            </Border>
+
+            <Button FocusVisualStyle="{StaticResource FocusVisualStyle}"
+                    x:Name="CreateUserButton"
+                    Content="Create User"
+                    HorizontalAlignment="Center"
+                    Width="184"
+                    Height="42"
+                    Grid.Row="4"
+                    VerticalAlignment="Top"
+                    Click="CreateUserButton_Click"
+                    Foreground="White"
+                    BorderThickness="0"
+                    FontSize="22"
+                    FontFamily="Agency FB"
+                    FontWeight="Bold"
+                    Margin="0,15,0,15">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background"
+                                Value="#0F0F0F" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="#252525" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="184"
+                                Height="42"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
+        </Grid>
+
+        <Grid x:Name="Priviliges"
+              Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="SystemPriviliges"
+                  Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border x:Name="SystemPriviligesCol1Border"
+                        Grid.Column="0"
+                        BorderBrush="White"
+                        BorderThickness="1,1,0.5,1">
+
+                    <Grid x:Name="SystemPriviligesCol1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+
+                        <Grid x:Name="CreateSession"
+                              Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="Create Session:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+
+                                <CheckBox x:Name="CreateSessionCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to connect to the database."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="CreateSessionCheckBox_Checked"
+                                          Checked="CreateSessionCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+
+                            </Grid>
+
+
+
+                            <CheckBox x:Name="CreateSessionWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give Permission to grant this privilige to others."
+                                      BorderBrush="Black"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      IsEnabled="False"
+                                      Visibility="Collapsed"
+                                      Background="White">
+                                <CheckBox.Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="IsChecked"
+                                                Value="False" />
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+
+                        </Grid>
+
+                        <Grid x:Name="CreateTable"
+                              Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- Create Table -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="Create Table:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+                                <!-- Checkbox for Create Table -->
+                                <CheckBox x:Name="CreateTableCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to create tables in their schema."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="CreateTableCheckBox_Checked"
+                                          Checked="CreateTableCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+                            </Grid>
+
+                            <!-- Checkbox for Create Table with Grant Option -->
+                            <CheckBox x:Name="CreateTableWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give permission to grant this privilege to others."
+                                      Background="White"
+                                      BorderBrush="Black"
+                                      IsEnabled="False"
+                                      VerticalAlignment="Center"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center">
+                                <CheckBox.Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="IsChecked"
+                                                Value="False" />
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+                        </Grid>
+
+                        <Grid x:Name="CreateProcedure"
+                              Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- Create Procedure -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="Create Procedure:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+                                <!-- Checkbox for Create Procedure -->
+                                <CheckBox x:Name="CreateProcedureCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to create stored procedures in their schema."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="CreateProcedureCheckBox_Checked"
+                                          Checked="CreateProcedureCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+                            </Grid>
+
+                            <!-- Checkbox for Create Procedure with Grant Option -->
+                            <CheckBox x:Name="CreateProcedureWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give permission to grant this privilege to others."
+                                      Background="White"
+                                      BorderBrush="Black"
+                                      VerticalAlignment="Center"
+                                      IsEnabled="False"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center">
+                                <CheckBox.Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="IsChecked"
+                                                Value="False" />
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+                        </Grid>
+
+                    </Grid>
+
+                </Border>
+                <Border x:Name="SystemPriviligesCol2Border"
+                        Grid.Column="1"
+                        BorderBrush="White"
+                        BorderThickness="0.5,1,1,1">
+
+                    <Grid x:Name="SystemPriviligesCol2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+
+                        <Grid x:Name="CreateView"
+                              Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- Create View -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="Create View:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+                                <!-- Checkbox for Create View -->
+                                <CheckBox x:Name="CreateViewCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to create views in their schema."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="CreateViewCheckBox_Checked"
+                                          Checked="CreateViewCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+                            </Grid>
+
+                            <!-- Checkbox for Create View with Grant Option -->
+                            <CheckBox x:Name="CreateViewWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give permission to grant this privilege to others."
+                                      Background="White"
+                                      BorderBrush="Black"
+                                      Visibility="Collapsed"
+                                      IsEnabled="False"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center">
+                                <CheckBox.Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="IsChecked"
+                                                Value="False" />
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+                        </Grid>
+
+                        <Grid x:Name="CreateTrigger"
+                              Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- Create Trigger -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="Create Trigger:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+                                <!-- Checkbox for Create Trigger -->
+                                <CheckBox x:Name="CreateTriggerCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to create triggers in their schema."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="CreateTriggerCheckBox_Checked"
+                                          Checked="CreateTriggerCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+                            </Grid>
+
+                            <!-- Checkbox for Create Trigger with Grant Option -->
+                            <CheckBox x:Name="CreateTriggerWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give permission to grant this privilege to others."
+                                      Background="White"
+                                      BorderBrush="Black"
+                                      VerticalAlignment="Center"
+                                      IsEnabled="False"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center">
+                                <CheckBox.Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="IsChecked"
+                                                Value="False" />
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+                        </Grid>
+
+                        <Grid x:Name="CreateSequence"
+                              Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- Create Sequence -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="Create Sequence:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+                                <!-- Checkbox for Create Sequence -->
+                                <CheckBox x:Name="CreateSequenceCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to create sequences in their schema."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="CreateSequenceCheckBox_Checked"
+                                          Checked="CreateSequenceCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+                            </Grid>
+
+                            <!-- Checkbox for Create Sequence with Grant Option -->
+                            <CheckBox x:Name="CreateSequenceWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give permission to grant this privilege to others."
+                                      Background="White"
+                                      BorderBrush="Black"
+                                      VerticalAlignment="Center"
+                                      IsEnabled="False"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center">
+                                <CheckBox.Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="IsChecked"
+                                                Value="False" />
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+                        </Grid>
+
+                    </Grid>
+
+
+                </Border>
+
+
+            </Grid>
+
+            <Grid x:Name="ObjectPriviliges"
+                  Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border x:Name="ObjectPriviligesCol1Border"
+                        Grid.Column="0"
+                        BorderBrush="White"
+                        BorderThickness="1,1,0.5,1">
+
+                    <Grid x:Name="ObjectPriviligesCol1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid x:Name="Select"
+                              Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- SELECT Privilege -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="SELECT:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+                                <!-- Checkbox for SELECT Privilege -->
+                                <CheckBox x:Name="SelectCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to query data from a table or view."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="SelectCheckBox_Checked"
+                                          Checked="SelectCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+                            </Grid>
+
+                            <!-- Checkbox for SELECT Privilege with Grant Option -->
+                            <CheckBox x:Name="SelectWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give permission to grant this privilege to others."
+                                      Background="White"
+                                      BorderBrush="Black"
+                                      VerticalAlignment="Center"
+                                      IsEnabled="False"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center">
+                                <CheckBox.Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="IsChecked"
+                                                Value="False" />
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+                        </Grid>
+
+                        <Grid x:Name="Insert"
+                              Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- INSERT Privilege -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="INSERT:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+                                <!-- Checkbox for INSERT Privilege -->
+                                <CheckBox x:Name="InsertCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to insert rows into a table."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="InsertCheckBox_Checked"
+                                          Checked="InsertCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+                            </Grid>
+
+                            <!-- Checkbox for INSERT Privilege with Grant Option -->
+                            <CheckBox x:Name="InsertWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give permission to grant this privilege to others."
+                                      Background="White"
+                                      BorderBrush="Black"
+                                      VerticalAlignment="Center"
+                                      IsEnabled="False"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center">
+                                <CheckBox.Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="IsChecked"
+                                                Value="False" />
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+                        </Grid>
+
+                        <Grid x:Name="Update"
+                              Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- UPDATE Privilege -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="UPDATE:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+                                <!-- Checkbox for UPDATE Privilege -->
+                                <CheckBox x:Name="UpdateCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to update existing rows in a table."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="UpdateCheckBox_Checked"
+                                          Checked="UpdateCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+                            </Grid>
+
+                            <!-- Checkbox for UPDATE Privilege with Grant Option -->
+                            <CheckBox x:Name="UpdateWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give permission to grant this privilege to others."
+                                      Background="White"
+                                      BorderBrush="Black"
+                                      VerticalAlignment="Center"
+                                      IsEnabled="False"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center">
+                                
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="white"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+                        </Grid>
+
+
+                    </Grid>
+
+                </Border>
+                <Border x:Name="ObjectPriviligesCol2Border"
+                        Grid.Column="1"
+                        BorderBrush="White"
+                        BorderThickness="0.5,1,1,1">
+
+                    <Grid x:Name="ObjectPriviligesCol2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid x:Name="Delete"
+                              Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- DELETE Privilege -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="DELETE:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+                                <!-- Checkbox for DELETE Privilege -->
+                                <CheckBox x:Name="DeleteCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to delete rows from a table."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="DeleteCheckBox_Checked"
+                                          Checked="DeleteCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+                            </Grid>
+
+                            <!-- Checkbox for DELETE Privilege with Grant Option -->
+                            <CheckBox x:Name="DeleteWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give permission to grant this privilege to others."
+                                      Background="White"
+                                      BorderBrush="Black"
+                                      VerticalAlignment="Center"
+                                      IsEnabled="False"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center">
+                                <CheckBox.Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="IsChecked"
+                                                Value="False" />
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+                        </Grid>
+
+                        <Grid x:Name="Execute"
+                              Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <!-- EXECUTE Privilege -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       FontFamily="Agency FB"
+                                       Foreground="#FFADADAD"
+                                       Background="{x:Null}"
+                                       Content="EXECUTE:"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+
+                                <!-- Checkbox for EXECUTE Privilege -->
+                                <CheckBox x:Name="ExecuteCheckBox"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Center"
+                                          Margin="5,5,5,5"
+                                          ToolTip="Allows a user to execute stored procedures and functions."
+                                          HorizontalAlignment="Left"
+                                          Background="White"
+                                          BorderBrush="Black"
+                                          Unchecked="ExecuteCheckBox_Checked"
+                                          Checked="ExecuteCheckBox_Checked">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="IsChecked"
+                                                    Value="False" />
+                                            <Setter Property="Foreground"
+                                                    Value="White" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked"
+                                                         Value="True">
+                                                    <Setter Property="Foreground"
+                                                            Value="Black" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <TextBlock Text="Grant"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontFamily="Agency FB"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0" />
+                                </CheckBox>
+                            </Grid>
+
+                            <!-- Checkbox for EXECUTE Privilege with Grant Option -->
+                            <CheckBox x:Name="ExecuteWithGrantOptionCheckbox"
+                                      Grid.Row="1"
+                                      Margin="5,5,5,5"
+                                      ToolTip="Give permission to grant this privilege to others."
+                                      Background="White"
+                                      BorderBrush="Black"
+                                      VerticalAlignment="Center"
+                                      IsEnabled="False"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center">
+                                <CheckBox.Style>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="IsChecked"
+                                                Value="False" />
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                                <TextBlock Text="With Grant Option"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontFamily="Agency FB"
+                                           FontWeight="Bold"
+                                           Margin="10,0,0,0" />
+                            </CheckBox>
+                        </Grid>
+                        <Border x:Name="RolesBorder"
+                                Grid.Row="2"
+                                BorderBrush="#FFFDFDFD"
+                                BorderThickness="0,1,0,0">
+
+                            <Grid x:Name="Roles">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid x:Name="GrantRole"
+                                      Grid.Row="0"
+                                      VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           FontFamily="Agency FB"
+                                           Foreground="#FFADADAD"
+                                           Background="{x:Null}"
+                                           Content="Grant Role:"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top" />
+
+                                    <CheckBox x:Name="GrantRoleCheckBox"
+                                              Grid.Column="1"
+                                              VerticalAlignment="Center"
+                                              Margin="5,5,5,5"
+                                              ToolTip="Allows a user to grant a role to another user."
+                                              HorizontalAlignment="Left"
+                                              Background="White"
+                                              BorderBrush="Black">
+                                        <CheckBox.Style>
+                                            <Style TargetType="{x:Type CheckBox}">
+                                                <Setter Property="IsChecked"
+                                                        Value="False" />
+                                                <Setter Property="Foreground"
+                                                        Value="White" />
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsChecked"
+                                                             Value="True">
+                                                        <Setter Property="Foreground"
+                                                                Value="Black" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </CheckBox.Style>
+                                        <TextBlock Text="Grant"
+                                                   Foreground="White"
+                                                   FontSize="18"
+                                                   FontFamily="Agency FB"
+                                                   FontWeight="Bold"
+                                                   Margin="10,0,0,0" />
+                                    </CheckBox>
+
+                                </Grid>
+
+                                <Grid x:Name="SetRole"
+                                      Grid.Row="1"
+                                      VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           FontFamily="Agency FB"
+                                           Foreground="#FFADADAD"
+                                           Background="{x:Null}"
+                                           Content="Set Role:"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top" />
+
+                                    <CheckBox x:Name="SetRoleCheckBox"
+                                              Grid.Column="1"
+                                              VerticalAlignment="Center"
+                                              Margin="5,5,5,5"
+                                              ToolTip="Allows a user to grant a role to another user."
+                                              HorizontalAlignment="Left"
+                                              Background="White"
+                                              BorderBrush="Black">
+                                        <CheckBox.Style>
+                                            <Style TargetType="{x:Type CheckBox}">
+                                                <Setter Property="IsChecked"
+                                                        Value="False" />
+                                                <Setter Property="Foreground"
+                                                        Value="White" />
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsChecked"
+                                                             Value="True">
+                                                        <Setter Property="Foreground"
+                                                                Value="Black" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </CheckBox.Style>
+                                        <TextBlock Text="Grant"
+                                                   Foreground="White"
+                                                   FontSize="18"
+                                                   FontFamily="Agency FB"
+                                                   FontWeight="Bold"
+                                                   Margin="10,0,0,0" />
+                                    </CheckBox>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </Border>
+
+                    </Grid>
+
+
+                </Border>
+
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>

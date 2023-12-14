@@ -1,0 +1,184 @@
+﻿<Window x:Class="ModernStyledApplication.MVVM.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:ModernStyledApplication.MVVM.ViewModel"
+        xmlns:extensions="clr-namespace:ModernStyledApplication.Core"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="475"
+        Width="850"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        ResizeMode="CanResize">
+
+    <Window.DataContext>
+        <viewmodel:MainViewModel />
+    </Window.DataContext>
+
+    <DockPanel Background="#1E1E1E"
+               Margin="7">
+
+        <Border Height="28"
+                Background="#252525"
+                DockPanel.Dock="Top">
+
+            <Border.InputBindings>
+                <MouseBinding MouseAction="LeftClick"
+                              Command="{Binding MoveWindowCommand}" />
+            </Border.InputBindings>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Oracle Database"
+                           Foreground="LightGray"
+                           FontFamily="Consolas"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Margin="100,0,0,0" />
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,4,0">
+                    <Button Content="−"
+                            Padding="0,0,0,2"
+                            Command="{Binding MinimizeWindowCommand}" />
+                    <Button Content="🗖"
+                            Padding="0,0,0,3"
+                            Command="{Binding MaximizeWindowCommand}" />
+                    <Button Content="🗙"
+                            Padding="0,0,0,2"
+                            Command="{Binding ShutdownWindowCommand}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Width="50"
+                x:Name="Navigation"
+                Background="#252525">
+
+            <Border.Style>
+                <Style>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="Border.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(Border.Width)"
+                                                         To="130"
+                                                         Duration="0:0:.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="Border.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(Border.Width)"
+                                                         To="50"
+                                                         Duration="0:0:.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <Grid x:Name="Buttons">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <RadioButton x:Name="HomeRadioButton"
+                                 Content="Home"
+                                 extensions:Extensions.Icon="♨"
+                                 FontSize="16"
+                                 Padding="8,8,15,5"
+                                 FontWeight="Normal"
+                                 Foreground="LightGray"
+                                 FontFamily="Consolas"
+                                 IsChecked="True"
+                                 Command="{Binding ShowHomeView}"
+                                 Margin="0,0,4,0"
+                                 Height="42"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center" />
+
+                    <RadioButton Content="Admin"
+                                 extensions:Extensions.Icon="👤"
+                                 FontSize="16"
+                                 Padding="8,8,15,5"
+                                 Margin="0,0,4,0"
+                                 FontWeight="Normal"
+                                 Foreground="LightGray"
+                                 FontFamily="Consolas"
+                                 IsChecked="False"
+                                 VerticalContentAlignment="Center"
+                                 x:Name="AdminRadioButton"
+                                 HorizontalContentAlignment="Center"
+                                 Command="{Binding ShowUserView}"
+                                 Height="42" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            Grid.Row="1"
+                            VerticalAlignment="Bottom">
+
+                    <Button FocusVisualStyle="{StaticResource FocusVisualStyle}"
+                            x:Name="LogOutButton"
+                            Content="↫ Log Out"
+                            Click="LogOutButton_Click"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="22"
+                            FontFamily="Agency FB"
+                            FontWeight="Bold"
+                            HorizontalContentAlignment="Center"
+                            Margin="5,5,5,5">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background"
+                                        Value="#0F0F0F" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Background"
+                                                Value="#252525" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="Auto"
+                                        Height="42"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="0"
+                                        Padding="10,5,10,5">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <ContentPresenter Content="{Binding CurrentView}" />
+
+    </DockPanel>
+</Window>

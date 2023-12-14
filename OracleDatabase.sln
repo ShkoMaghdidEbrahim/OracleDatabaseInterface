@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OracleDatabase", "OracleDatabase\OracleDatabase.csproj", "{F833F165-CE72-4A07-8C41-8157FD5C4F39}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B6DB6E03-2ADA-4C1A-AF43-6108E3B313FA}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Desktop\add-user.png = ..\..\..\..\Desktop\add-user.png
+		Background.jpg = Background.jpg
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F833F165-CE72-4A07-8C41-8157FD5C4F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F833F165-CE72-4A07-8C41-8157FD5C4F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F833F165-CE72-4A07-8C41-8157FD5C4F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F833F165-CE72-4A07-8C41-8157FD5C4F39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8FF3167-95FA-4368-8CC0-FD37B5D58B60}
+	EndGlobalSection
+EndGlobal
