@@ -5,12 +5,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:viewmodel="clr-namespace:ModernStyledApplication.MVVM.ViewModel"
         mc:Ignorable="d"
-        d:DesignHeight="450"
-        d:DesignWidth="800"
+        d:DesignHeight="475"
+        d:DesignWidth="850"
         Background="#1E1E1E"
         Title="MainWindow"
-        Height="450"
-        Width="800"
+        Height="475"
+        Width="850"
         WindowStyle="None"
         AllowsTransparency="True"
         ResizeMode="CanResize">
@@ -21,10 +21,183 @@
 
     <Grid>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+
+        <Border x:Name="Fields"
+                MaxWidth="300"
+                MaxHeight="356"
+                CornerRadius="16"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Padding="15,0,15,0"
+                Background="#FF383838"
+                Margin="0,0,0,15">
+
+
+
+            <Grid Height="326"
+                  Width="240">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBox FocusVisualStyle="{StaticResource FocusVisualStyle}"
+                         Grid.Row="0"
+                         KeyDown="UsernameTextBox_KeyDown"
+                         Width="240"
+                         VerticalAlignment="Center"
+                         Height="42"
+                         Padding="5,0,0,0"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"
+                         Background="#FF252525"
+                         BorderBrush="Black"
+                         Foreground="White"
+                         FontFamily="Agency FB"
+                         FontSize="18"
+                         x:Name="UsernameTextBox"
+                         Margin="0,15,0,15" />
+                <TextBlock x:Name="UsernameTextBlock"
+                           IsHitTestVisible="False"
+                           Grid.Row="0"
+                           Text="Username"
+                           VerticalAlignment="Top"
+                           Foreground="DarkGray"
+                           Width="228"
+                           FontSize="18"
+                           Margin="0,24,0,15"
+                           FontFamily="Agency FB">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=UsernameTextBox}"
+                                             Value="">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+
+                <TextBox FocusVisualStyle="{StaticResource FocusVisualStyle}"
+                         KeyDown="PasswordTextBox_KeyDown"
+                         Width="240"
+                         Grid.Row="1"
+                         VerticalAlignment="Top"
+                         x:Name="PasswordTextBox"
+                         Height="42"
+                         Padding="5,0,0,0"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"
+                         Background="#FF252525"
+                         BorderBrush="Black"
+                         Foreground="White"
+                         FontFamily="Agency FB"
+                         FontSize="18"
+                         Margin="0,0,0,15" />
+                <TextBlock x:Name="PasswordTextBlock"
+                           IsHitTestVisible="False"
+                           Text="Password"
+                           Grid.Row="1"
+                           VerticalAlignment="Top"
+                           Foreground="DarkGray"
+                           Width="228"
+                           FontSize="18"
+                           Margin="0,9,0,15"
+                           FontFamily="Agency FB">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=PasswordTextBox}"
+                                             Value="">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <Button FocusVisualStyle="{StaticResource FocusVisualStyle}"
+                        x:Name="LoginButton"
+                        Content="Login"
+                        Width="184"
+                        Grid.Row="2"
+                        Height="42"
+                        Click="LoginButton_Click"
+                        Foreground="White"
+                        BorderThickness="0"
+                        FontSize="22"
+                        FontFamily="Agency FB"
+                        FontWeight="Bold"
+                        Margin="0,0,0,15"
+                        VerticalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background"
+                                    Value="#0F0F0F" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="#252525" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="184"
+                                    Height="42"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="0">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <TextBlock x:Name="StatusTextBlock"
+                           Margin="0,20,0,0"
+                           Text=""
+                           Grid.Row="3"
+                           VerticalAlignment="Top"
+                           TextAlignment="Center"
+                           Width="228"
+                           Foreground="LightGray"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Height="120"
+                           TextWrapping="Wrap"
+                           FontFamily="Cascadia Code" />
+
+            </Grid>
+
+
+
+        </Border>
+
+
 
         <Border x:Name="Header"
-                Background="#252525"
-                Margin="0,0,0,422"
+                Background="#FF252525"
+                Grid.Row="0"
                 VerticalAlignment="Top">
 
             <Border.InputBindings>
@@ -59,183 +232,8 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <Border x:Name="AllFields"
-                Height="337"
-                Margin="0,50,0,50"
-                Background="#1E1E1E"
-                CornerRadius="10"
-                Panel.ZIndex="1"
-                HorizontalAlignment="Center"
-                Padding="30,0,30,0">
-            <Grid>
 
-                <Border x:Name="TextFields"
-                        HorizontalAlignment="Center"
-                        Height="109"
-                        VerticalAlignment="Top"
-                        Width="240"
-                        Margin="0,10,0,0">
-                    <Grid>
-                        <Border HorizontalAlignment="Center"
-                                VerticalAlignment="Top">
-                            <Grid>
-                                <TextBox FocusVisualStyle="{StaticResource FocusVisualStyle}"
-                                         KeyDown="UsernameTextBox_KeyDown"
-                                         Width="240"
-                                         VerticalAlignment="Top"
-                                         HorizontalAlignment="Center"
-                                         Height="42"
-                                         Padding="5,0,0,0"
-                                         BorderThickness="0"
-                                         VerticalContentAlignment="Center"
-                                         Background="#252525"
-                                         BorderBrush="Black"
-                                         Foreground="White"
-                                         FontFamily="Agency FB"
-                                         FontSize="18"
-                                         x:Name="UsernameTextBox"
-                                         Margin="0,12,0,0" />
 
-                                <TextBlock IsHitTestVisible="False"
-                                           Text="Username"
-                                           VerticalAlignment="Top"
-                                           HorizontalAlignment="Center"
-                                           Foreground="DarkGray"
-                                           Width="228"
-                                           FontSize="18"
-                                           Margin="0,21,0,0"
-                                           FontFamily="Agency FB">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility"
-                                                    Value="Collapsed" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=UsernameTextBox}"
-                                                             Value="">
-                                                    <Setter Property="Visibility"
-                                                            Value="Visible" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                            </Grid>
-                        </Border>
-                        <Border HorizontalAlignment="Center"
-                                Margin="0,67,0,0"
-                                VerticalAlignment="Top">
-                            <Grid>
-
-                                <TextBox FocusVisualStyle="{StaticResource FocusVisualStyle}"
-                                         KeyDown="PasswordTextBox_KeyDown"
-                                         Width="240"
-                                         VerticalAlignment="Top"
-                                         HorizontalAlignment="Center"
-                                         x:Name="PasswordTextBox"
-                                         Height="42"
-                                         Padding="5,0,0,0"
-                                         BorderThickness="0"
-                                         VerticalContentAlignment="Center"
-                                         Background="#252525"
-                                         BorderBrush="Black"
-                                         Foreground="White"
-                                         FontFamily="Agency FB"
-                                         FontSize="18" />
-
-                                <TextBlock IsHitTestVisible="False"
-                                           Text="Password"
-                                           VerticalAlignment="Top"
-                                           HorizontalAlignment="Center"
-                                           Foreground="DarkGray"
-                                           Width="228"
-                                           FontSize="18"
-                                           Margin="0,9,0,0"
-                                           FontFamily="Agency FB">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility"
-                                                    Value="Collapsed" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=PasswordTextBox}"
-                                                             Value="">
-                                                    <Setter Property="Visibility"
-                                                            Value="Visible" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-
-                            </Grid>
-                        </Border>
-
-                    </Grid>
-                </Border>
-                <Border x:Name="ButtonAndStatus"
-                        HorizontalAlignment="Center"
-                        Height="196"
-                        Margin="0,141,0,0"
-                        VerticalAlignment="Top"
-                        Width="228">
-                    <Grid>
-
-                        <Button FocusVisualStyle="{StaticResource FocusVisualStyle}"
-                                x:Name="LoginButton"
-                                Content="Login"
-                                HorizontalAlignment="Center"
-                                Width="184"
-                                Height="42"
-                                VerticalAlignment="Top"
-                                Click="LoginButton_Click"
-                                Foreground="White"
-                                BorderThickness="0"
-                                FontSize="22"
-                                FontFamily="Agency FB"
-                                FontWeight="Bold">
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background"
-                                            Value="#0F0F0F" />
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver"
-                                                 Value="True">
-                                            <Setter Property="Background"
-                                                    Value="#252525" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-
-                            <Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Width="184"
-                                            Height="42"
-                                            Background="{TemplateBinding Background}"
-                                            CornerRadius="0">
-                                        <ContentPresenter HorizontalAlignment="Center"
-                                                          VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                        <TextBlock x:Name="StatusTextBlock"
-                                   Margin="0,66,0,0"
-                                   Text=""
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Top"
-                                   TextAlignment="Center"
-                                   Width="228"
-                                   Foreground="LightGray"
-                                   FontSize="16"
-                                   FontWeight="Bold"
-                                   Height="120"
-                                   TextWrapping="Wrap"
-                                   FontFamily="Cascadia Code" />
-                    </Grid>
-                </Border>
-            </Grid>
-        </Border>
     </Grid>
 
 

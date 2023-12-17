@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
@@ -16,9 +15,8 @@ using OracleDatabase.MVVM.View;
 namespace ModernStyledApplication.MVVM.View;
 
 public partial class HomeView {
-    public static string connectionString = Application.Current.Resources["ConnectionString"].ToString();
+    public string connectionString = Application.Current.Resources["ConnectionString"].ToString();
     public static DataTable dataTable = new();
-    private readonly OracleConnection conn = new(connectionString);
 
     public string CellColumnName;
     public string CellColumnValue;
@@ -28,13 +26,10 @@ public partial class HomeView {
     string query = "";
 
     public HomeView() {
-        conn.Open();
         InitializeComponent();
         Dispatcher.BeginInvoke(new Action(() => TableNameTextBox.Focus()), System.Windows.Threading.DispatcherPriority.Render);
         TableNameTextBox.Focus();
     }
-
-    public ObservableCollection<string?> TableNames { get; set; }
 
     private void LoadTable() {
         try
@@ -136,7 +131,10 @@ public partial class HomeView {
                     }
                 }
             }
-            using (var cmd = new OracleCommand(query, conn))
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                connection.Open();
+                using (var cmd = new OracleCommand(query, connection))
                 {
                     using (var dataAdapter = new OracleDataAdapter())
                     {
@@ -146,15 +144,16 @@ public partial class HomeView {
                         TableData.ItemsSource = dataTable.DefaultView;
                         dataTable = dataSet.Tables[0];
                         TableData.ItemsSource = dataTable.DefaultView;
-                    if(isStartCommand)
-                    {
-FillComboBoxWithColumnNames();
-                    }
-                        
+                        if (isStartCommand)
+                        {
+                            FillComboBoxWithColumnNames();
+                        }
+
                         UpdateStatus("Table Loaded Succesfully!", Colors.Green);
                     }
-                    
+
                 }
+            }
         }
         catch (OracleException ex)
         {
@@ -176,17 +175,21 @@ FillComboBoxWithColumnNames();
         {
             try
             {
-                using (var cmd = new OracleCommand(query, conn))
+                using (OracleConnection connection = new OracleConnection(connectionString))
                 {
-                    using (var dataAdapter = new OracleDataAdapter())
+                    connection.Open();
+                    using (var cmd = new OracleCommand(query, connection))
                     {
-                        dataSet = new DataSet();
-                        dataAdapter.SelectCommand = cmd;
+                        using (var dataAdapter = new OracleDataAdapter())
+                        {
+                            dataSet = new DataSet();
+                            dataAdapter.SelectCommand = cmd;
 
-                        dataAdapter.Fill(dataSet);
-                        TableData.ItemsSource = dataTable.DefaultView;
-                        dataTable = dataSet.Tables[0];
-                        TableData.ItemsSource = dataTable.DefaultView;
+                            dataAdapter.Fill(dataSet);
+                            TableData.ItemsSource = dataTable.DefaultView;
+                            dataTable = dataSet.Tables[0];
+                            TableData.ItemsSource = dataTable.DefaultView;
+                        }
                     }
                 }
             }
@@ -202,6 +205,7 @@ FillComboBoxWithColumnNames();
             MessageBox.Show("Select A Table First\nIf You Have Then Check If It Exists");
         }
     }
+
     private void Button_Click(object sender, RoutedEventArgs e) {
         TableName = TableNameTextBox.Text;
         LoadTable();
@@ -319,16 +323,20 @@ FillComboBoxWithColumnNames();
                 var deleteQuery = $"DELETE FROM {TableName} WHERE {firstColumnName} = {firstColumnValue}";
 
                 try {
-                    var cmd = new OracleCommand(deleteQuery, conn);
-                    try {
-                        cmd.ExecuteNonQuery();
-                        UpdateStatus("Row Deleted Succesfully!", Colors.Green);
+                    using (OracleConnection connection = new OracleConnection(connectionString))
+                    {
+                        var cmd = new OracleCommand(deleteQuery, connection);
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                            UpdateStatus("Row Deleted Succesfully!", Colors.Green);
+                        }
+                        catch (OracleException ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message);
+                            UpdateStatus("Failed To Delete Row", Colors.Red);
+                        }
                     }
-                    catch (OracleException ex) {
-                        MessageBox.Show("Error: " + ex.Message);
-                        UpdateStatus("Failed To Delete Row", Colors.Red);
-                    }
-
                     RefreshTable();
                 }
                 catch (OracleException ex) {
@@ -346,20 +354,29 @@ FillComboBoxWithColumnNames();
     }
 
     public void ExecuteCommand(string query) {
-        if (conn.State != ConnectionState.Open) conn.Open();
-        var cmd = new OracleCommand(query, conn);
+        using (OracleConnection connection = new OracleConnection(connectionString))
+        {
+            connection.Open();
+            var cmd = new OracleCommand(query, connection);
             cmd.ExecuteNonQuery();
             UpdateStatus("Command Executed Succesfully!", Colors.Green);
             LoadTable();
+        }
         
     }
 
     public string checkDataType(string fieldName) {
-        using (var command = new OracleCommand($"select {fieldName} from {TableName}", conn)) {
-            using (var reader = command.ExecuteReader()) {
-                var schemaTable = reader.GetSchemaTable();
+        using (OracleConnection connection = new OracleConnection(connectionString))
+        {
+            connection.Open();
+            using (var command = new OracleCommand($"select {fieldName} from {TableName}", connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    var schemaTable = reader.GetSchemaTable();
 
-                foreach (DataRow row in schemaTable.Rows) return row["DataType"].ToString();
+                    foreach (DataRow row in schemaTable.Rows) return row["DataType"].ToString();
+                }
             }
         }
 

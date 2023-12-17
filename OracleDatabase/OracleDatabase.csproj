@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Images\add_user.png" />
+    </ItemGroup>
+
+    <ItemGroup>
         <Folder Include="MVVM\Model\" />
     </ItemGroup>
 
@@ -16,6 +20,10 @@
       <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.120" />
       <PackageReference Include="PDF.Core" Version="2020.12.2" />
       <PackageReference Include="PDFsharp-WPF" Version="6.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Images\add_user.png" />
     </ItemGroup>
 
 </Project>

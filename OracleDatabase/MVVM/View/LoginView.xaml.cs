@@ -16,17 +16,17 @@ public partial class LoginView {
         CenterWindowOnScreen(this);
     }
 
-
     private async void LoginButton_Click(object sender, RoutedEventArgs e) {
         string username = UsernameTextBox.Text;
         string password = PasswordTextBox.Text;
+
         var connectionString = $"User Id={username};Password={password};" + "Data Source=(DESCRIPTION=" +
                                "(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))" +
                                "(CONNECT_DATA=" +
                                "(SERVER=DEDICATED)" +
                                "(SERVICE_NAME=orclpdb)));" +
                                "Connection Timeout = 120";
-
+        
         if (username == "sys as sysdba")
         {
             connectionString += ";DBA Privilege=SYSDBA";
@@ -35,37 +35,38 @@ public partial class LoginView {
         {
               connectionString += ";";
         }
-
-
+        
         Application.Current.Resources["ConnectionString"] = connectionString;
         Application.Current.Resources["Username"] = username;
         Application.Current.Resources["Password"] = password;
-
         try {
-            await using var con = new OracleConnection(connectionString);
-            UpdateStatus("Connecting...", Colors.White);
-            await Task.Run(() =>
+            using (OracleConnection connection = new OracleConnection(connectionString))
             {
-                con.Open();
-            });
-            
-            if (con.State == ConnectionState.Open) {
-                UpdateStatus("Connected successfully.", Colors.Green);
-                await Task.Delay(50);
+                UpdateStatus("Connecting...", Colors.White);
+                await Task.Run(() =>
+                {
+                    connection.Open();
+                });
 
-                double left = this.Left;
-                double top = this.Top;
+                if (connection.State == ConnectionState.Open)
+                {
+                    UpdateStatus("Connected successfully.", Colors.Green);
+                    await Task.Delay(50);
 
-                var mainWindow = new MainWindow(left, top);
-                Application.Current.MainWindow = mainWindow;
-                mainWindow.Show();
+                    double left = this.Left;
+                    double top = this.Top;
 
-                Close();
-            }
-            else {
-                UsernameTextBox.Text = "";
-                PasswordTextBox.Text = "";
-                UpdateStatus("Failed to connect.", Colors.Red);
+                    var mainWindow = new MainWindow(left, top);
+                    Application.Current.MainWindow = mainWindow;
+                    mainWindow.Show();
+                    Close();
+                }
+                else
+                {
+                    UsernameTextBox.Text = "";
+                    PasswordTextBox.Text = "";
+                    UpdateStatus("Failed to connect.", Colors.Red);
+                }
             }
         }
         catch (OracleException ex) {
@@ -109,7 +110,6 @@ public partial class LoginView {
             StatusTextBlock.Text = string.Empty;
         }, TaskScheduler.FromCurrentSynchronizationContext());
     }
-
 
     private void CenterWindowOnScreen(Window window)
     {

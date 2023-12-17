@@ -25,7 +25,7 @@
 
 
             <Image x:Name="AddUserIcon"
-                   Source="C:\Users\AL AMEER\source\repos\New folder\OracleDatabase\OracleDatabase\Images\add_user.png"
+                   Source="/OracleDatabase;component\Images\add_user.png"
                    Grid.Row="0"
                    MaxWidth="400"
                    MaxHeight="400" />
@@ -1140,7 +1140,6 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
                         <Grid x:Name="Delete"
@@ -1330,122 +1329,6 @@
                                            Margin="10,0,0,0" />
                             </CheckBox>
                         </Grid>
-                        <Border x:Name="RolesBorder"
-                                Grid.Row="2"
-                                BorderBrush="#FFFDFDFD"
-                                BorderThickness="0,1,0,0">
-
-                            <Grid x:Name="Roles">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-
-                                <Grid x:Name="GrantRole"
-                                      Grid.Row="0"
-                                      VerticalAlignment="Center">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Column="0"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           FontFamily="Agency FB"
-                                           Foreground="#FFADADAD"
-                                           Background="{x:Null}"
-                                           Content="Grant Role:"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Top" />
-
-                                    <CheckBox x:Name="GrantRoleCheckBox"
-                                              Grid.Column="1"
-                                              VerticalAlignment="Center"
-                                              Margin="5,5,5,5"
-                                              ToolTip="Allows a user to grant a role to another user."
-                                              HorizontalAlignment="Left"
-                                              Background="White"
-                                              BorderBrush="Black">
-                                        <CheckBox.Style>
-                                            <Style TargetType="{x:Type CheckBox}">
-                                                <Setter Property="IsChecked"
-                                                        Value="False" />
-                                                <Setter Property="Foreground"
-                                                        Value="White" />
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsChecked"
-                                                             Value="True">
-                                                        <Setter Property="Foreground"
-                                                                Value="Black" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </CheckBox.Style>
-                                        <TextBlock Text="Grant"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   FontFamily="Agency FB"
-                                                   FontWeight="Bold"
-                                                   Margin="10,0,0,0" />
-                                    </CheckBox>
-
-                                </Grid>
-
-                                <Grid x:Name="SetRole"
-                                      Grid.Row="1"
-                                      VerticalAlignment="Center">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Column="0"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           FontFamily="Agency FB"
-                                           Foreground="#FFADADAD"
-                                           Background="{x:Null}"
-                                           Content="Set Role:"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Top" />
-
-                                    <CheckBox x:Name="SetRoleCheckBox"
-                                              Grid.Column="1"
-                                              VerticalAlignment="Center"
-                                              Margin="5,5,5,5"
-                                              ToolTip="Allows a user to grant a role to another user."
-                                              HorizontalAlignment="Left"
-                                              Background="White"
-                                              BorderBrush="Black">
-                                        <CheckBox.Style>
-                                            <Style TargetType="{x:Type CheckBox}">
-                                                <Setter Property="IsChecked"
-                                                        Value="False" />
-                                                <Setter Property="Foreground"
-                                                        Value="White" />
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsChecked"
-                                                             Value="True">
-                                                        <Setter Property="Foreground"
-                                                                Value="Black" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </CheckBox.Style>
-                                        <TextBlock Text="Grant"
-                                                   Foreground="White"
-                                                   FontSize="18"
-                                                   FontFamily="Agency FB"
-                                                   FontWeight="Bold"
-                                                   Margin="10,0,0,0" />
-                                    </CheckBox>
-
-                                </Grid>
-
-                            </Grid>
-
-                        </Border>
 
                     </Grid>
 

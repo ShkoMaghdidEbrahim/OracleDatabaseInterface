@@ -41,7 +41,8 @@
             <DoubleAnimation Storyboard.TargetName="StatusTextBlock"
                              Storyboard.TargetProperty="Width"
                              To="287"
-                             Duration="0:0:0"/>
+                             Duration="0:0:0"
+                             BeginTime="0:0:0.7" />
         </Storyboard>
 
         <Style x:Key="DataGridContentCellCentering"

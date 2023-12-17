@@ -1,8 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Windows;
-using ModernStyledApplication.MVVM.View;
+using OracleDatabase.MVVM.View;
 using ModernVPN.Core;
+using ModernStyledApplication.MVVM.View;
 
 namespace ModernStyledApplication.MVVM.ViewModel;
 
